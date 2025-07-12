@@ -5,6 +5,22 @@ interface Student {
   location: string;
 }
 
+interface Teacher {
+  readonly firstName: string;
+  readonly lastName: string;
+  fullTimeEmployee: boolean;
+  yearsOfExperience?: number;
+  location: string;
+  // Add the possibility to add any attribute to the Object like contract(boolean) without specifying the name of the attribute
+  [propName: string]: any;
+}
+
+interface Directors extends Teacher {
+  numberOfReports: number;
+}
+
+
+
 const table = document.createElement("table");
 table.appendChild(document.createElement("thead"));
 table.appendChild(document.createElement("tbody"));
@@ -69,7 +85,40 @@ let student2 = {
   age: 23,
   location: "Kayole",
 };
+const teacher3: Teacher = {
+  firstName: 'John',
+  fullTimeEmployee: false,
+  lastName: 'Doe',
+  location: 'London',
+  contract: false,
+};
 
 addRow(student.firstName, student.lastName, student.age, student.location);
 addRow(student2.firstName, student2.lastName, student2.age, student2.location);
 // let studentsList: Student[] = [];
+
+
+function printTeacher(firstName: string, lastName: string):string{
+  return `${firstName[0]}. ${lastName}`;
+}
+
+class StudentClass implements Student {
+  firstName: string;
+  lastName: string;
+  age: number;
+  location: string;
+  constructor(firstName:string, lastName:string, age:number, location:string) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+    this.location = location;
+  }
+
+  workOnHomework(): string {
+    return 'Currently working';
+  }
+  displayName(): string {
+    return this.firstName;
+  }
+
+}
